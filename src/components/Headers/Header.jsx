@@ -29,15 +29,15 @@ class Header extends React.Component {
 			db.collection("stats")
 				.where("userId", "==", this.context.user.uid)
 				.onSnapshot(
-					querySnapshot => {
+					(querySnapshot) => {
 						if (querySnapshot.docs.length > 0) {
 							this.context.updateUserStats({
 								...querySnapshot.docs[0].data(),
-								id: querySnapshot.docs[0].id
+								id: querySnapshot.docs[0].id,
 							});
 						}
 					},
-					err => {
+					(err) => {
 						console.log(`Encountered error: ${err}`);
 					}
 				);
@@ -160,7 +160,8 @@ class Header extends React.Component {
 														Profile
 													</CardTitle>
 													<span className="h2 font-weight-bold mb-0">
-														{this.context.user.displayName.split(" ")[0]}
+														{this.context.user.displayName &&
+															this.context.user.displayName.split(" ")[0]}
 													</span>
 												</div>
 												<Col className="col-auto" style={{ height: 48.8 }}>
