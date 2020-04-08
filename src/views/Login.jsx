@@ -149,9 +149,10 @@ class Login extends React.Component {
 								})}
 							>
 								<small>
-									{this.state.error || this.state.signup
-										? "Or sign up with credentials"
-										: "Or sign in with credentials"}
+									{this.state.error ||
+										(this.state.signup
+											? "Or sign up with credentials"
+											: "Or sign in with credentials")}
 								</small>
 							</div>
 							<Form role="form">

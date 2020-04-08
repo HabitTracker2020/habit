@@ -2,12 +2,6 @@ import React, { Component } from "react";
 import { auth, GoogleProvider, GithubProvider, db } from "../firebase.js";
 import GlobalContext from "./Global";
 
-const defaultStats = {
-	diamonds: 50,
-	health: 100,
-	level: 1,
-};
-
 class GlobalState extends Component {
 	state = {
 		user: null,
@@ -65,9 +59,15 @@ class GlobalState extends Component {
 	};
 
 	afterLogin = (result) => {
+		const defaultStats = {
+			diamonds: 50,
+			health: 100,
+			level: 1,
+			userId: result.user.uid,
+		};
 		const user = {
 			...result.user,
-			stats: { ...defaultStats, userId: result.user.uid },
+			stats: defaultStats,
 		};
 		if (result.additionalUserInfo.isNewUser) {
 			db.collection("stats").add(defaultStats);
