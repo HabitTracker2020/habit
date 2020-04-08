@@ -17,9 +17,9 @@
 */
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import AuthNavbar from "components/Navbars/AuthNavbar.jsx";
-import routes from "routes.js";
-import AuthContext from "context/Global";
+import AuthNavbar from "../components/Navbars/AuthNavbar.jsx";
+import routes from "../routes";
+import AuthContext from "../context/Global";
 
 class Admin extends React.Component {
 	static contextType = AuthContext;
@@ -34,7 +34,7 @@ class Admin extends React.Component {
 		this.context.onAuthChange();
 	}
 
-	getRoutes = routes => {
+	getRoutes = (routes) => {
 		return routes.map((prop, key) => {
 			if (prop.layout === "/main") {
 				return (

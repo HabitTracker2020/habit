@@ -15,9 +15,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Index from "views/Index.jsx";
-import Profile from "views/Profile.jsx";
-import Login from "views/Login.jsx";
+import Index from "./views/Index.jsx";
+import Profile from "./views/Profile.jsx";
+import Login from "./views/Login.jsx";
 
 var routes = [
 	{
@@ -25,7 +25,7 @@ var routes = [
 		name: "Dashboard",
 		icon: "ni ni-tv-2 text-primary",
 		component: Index,
-		layout: "/main"
+		layout: "/main",
 	},
 
 	{
@@ -33,7 +33,7 @@ var routes = [
 		name: "User Profile",
 		icon: "ni ni-single-02 text-yellow",
 		component: Profile,
-		layout: "/main"
+		layout: "/main",
 	},
 
 	{
@@ -41,7 +41,7 @@ var routes = [
 		name: "Login",
 		icon: "ni ni-key-25 text-info",
 		component: Login,
-		layout: "/auth"
-	}
+		layout: "/auth",
+	},
 ];
 export default routes;

@@ -19,8 +19,8 @@ import React from "react";
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
 
-import Header from "components/Headers/Header.jsx";
-import { HabitCard, TodoCard, RewardCard } from "components/Cards";
+import Header from "../components/Headers/Header.jsx";
+import { HabitCard, TodoCard, RewardCard } from "../components/Cards";
 import AuthContext from "../context/Global";
 
 class Index extends React.Component {

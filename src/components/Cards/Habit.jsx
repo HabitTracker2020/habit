@@ -15,8 +15,8 @@ import {
 	ButtonGroup,
 	Badge,
 } from "reactstrap";
-import GlobalContext from "context/Global";
-import { db } from "firebase.js";
+import GlobalContext from "../../context/Global";
+import { db } from "../../firebase.js";
 
 class Habit extends React.Component {
 	static contextType = GlobalContext;

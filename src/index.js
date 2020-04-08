@@ -19,19 +19,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import GlobalState from "./context/GlobalState";
-import "assets/vendor/nucleo/css/nucleo.css";
-import "assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
-import "assets/scss/argon-dashboard-react.scss";
+import "./assets/vendor/nucleo/css/nucleo.css";
+import "./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
+import "./assets/scss/argon-dashboard-react.scss";
 
-import MainLayout from "layouts/Main.jsx";
-import AuthLayout from "layouts/Auth.jsx";
+import MainLayout from "./layouts/Main.jsx";
+import AuthLayout from "./layouts/Auth.jsx";
 
 ReactDOM.render(
 	<GlobalState>
 		<BrowserRouter>
 			<Switch>
-				<Route path="/main" render={props => <MainLayout {...props} />} />
-				<Route path="/auth" render={props => <AuthLayout {...props} />} />
+				<Route path="/main" render={(props) => <MainLayout {...props} />} />
+				<Route path="/auth" render={(props) => <AuthLayout {...props} />} />
 				<Redirect from="/" to="/main/dashboard" />
 			</Switch>
 		</BrowserRouter>

@@ -19,8 +19,8 @@ import React from "react";
 
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
-import GlobalContext from "context/Global";
-import { db } from "firebase.js";
+import GlobalContext from "../../context/Global";
+import { db } from "../../firebase.js";
 
 class Header extends React.Component {
 	static contextType = GlobalContext;

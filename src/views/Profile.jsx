@@ -20,8 +20,8 @@ import React from "react";
 // reactstrap components
 import { Card, CardHeader, CardBody, Container, Row, Col } from "reactstrap";
 // core components
-import UserHeader from "components/Headers/UserHeader.jsx";
-import AuthContext from "context/Global";
+import UserHeader from "../components/Headers/UserHeader.jsx";
+import AuthContext from "../context/Global";
 
 class Profile extends React.Component {
 	static contextType = AuthContext;
@@ -38,7 +38,7 @@ class Profile extends React.Component {
 									<Row className="justify-content-center">
 										<Col className="order-lg-2" lg="3">
 											<div className="card-profile-image">
-												<a href="#pablo" onClick={e => e.preventDefault()}>
+												<a href="#pablo" onClick={(e) => e.preventDefault()}>
 													<img
 														alt="..."
 														className="rounded-circle"

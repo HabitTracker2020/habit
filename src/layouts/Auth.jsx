@@ -20,8 +20,8 @@ import { Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
 
-import routes from "routes.js";
-import GlobalContext from "context/Global";
+import routes from "../routes";
+import GlobalContext from "../context/Global";
 
 class Auth extends React.Component {
 	static contextType = GlobalContext;
@@ -32,7 +32,7 @@ class Auth extends React.Component {
 	componentWillUnmount() {
 		document.body.classList.remove("bg-default");
 	}
-	getRoutes = routes => {
+	getRoutes = (routes) => {
 		return routes.map((prop, key) => {
 			if (prop.layout === "/auth") {
 				return (

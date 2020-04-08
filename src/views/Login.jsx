@@ -16,7 +16,7 @@
 
 */
 import React from "react";
-import GlobalContext from "context/Global";
+import GlobalContext from "../context/Global";
 // reactstrap components
 import {
 	Button,
@@ -117,7 +117,7 @@ class Login extends React.Component {
 									<span className="btn-inner--icon">
 										<img
 											alt="..."
-											src={require("assets/img/icons/common/github.svg")}
+											src={require("../assets/img/icons/common/github.svg")}
 										/>
 									</span>
 									<span className="btn-inner--text">Github</span>
@@ -134,7 +134,7 @@ class Login extends React.Component {
 									<span className="btn-inner--icon">
 										<img
 											alt="..."
-											src={require("assets/img/icons/common/google.svg")}
+											src={require("../assets/img/icons/common/google.svg")}
 										/>
 									</span>
 									<span className="btn-inner--text">Google</span>

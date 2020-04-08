@@ -16,8 +16,8 @@ import {
 	InputGroupAddon,
 	InputGroupText,
 } from "reactstrap";
-import GlobalContext from "context/Global";
-import { db } from "firebase.js";
+import GlobalContext from "../../context/Global";
+import { db } from "../../firebase.js";
 
 class Reward extends React.Component {
 	static contextType = GlobalContext;
