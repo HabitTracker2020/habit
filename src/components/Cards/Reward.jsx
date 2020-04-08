@@ -14,7 +14,7 @@ import {
 	Modal,
 	InputGroup,
 	InputGroupAddon,
-	InputGroupText
+	InputGroupText,
 } from "reactstrap";
 import GlobalContext from "context/Global";
 import { db } from "firebase.js";
@@ -34,19 +34,20 @@ class Reward extends React.Component {
 		rewards: [],
 		item: "",
 		rewardModal: false,
-		modelProps: { title: "", cost: 0 }
+		modelProps: { title: "", cost: 0 },
 	};
 
-	toggleModal = props => {
+	toggleModal = (props) => {
 		this.setState({
 			rewardModal: !this.state.rewardModal,
-			modelProps: props
+			modelProps: props,
 		});
 	};
 
-	claimReward(cost) {
+	claimReward(cost, title) {
 		db.doc(`stats/${this.context.user.stats.id}`).update({
-			diamonds: this.context.user.stats.diamonds - cost
+			diamonds: this.context.user.stats.diamonds - cost,
+			last: { title: title + " Claimed", color: "warning" },
 		});
 	}
 
@@ -67,16 +68,16 @@ class Reward extends React.Component {
 			db.collection("rewards")
 				.where("userId", "==", this.context.user.uid)
 				.onSnapshot(
-					querySnapshot => {
+					(querySnapshot) => {
 						var rewards = [];
-						querySnapshot.forEach(doc => {
+						querySnapshot.forEach((doc) => {
 							rewards.push({ ...doc.data(), id: doc.id });
 						});
 						this.setState({
-							rewards: [...rewards]
+							rewards: [...rewards],
 						});
 					},
-					err => {
+					(err) => {
 						console.log(`Encountered error: ${err}`);
 					}
 				);
@@ -89,7 +90,7 @@ class Reward extends React.Component {
 		const name = target.name;
 
 		this.setState({
-			modelProps: { ...this.state.modelProps, [name]: value }
+			modelProps: { ...this.state.modelProps, [name]: value },
 		});
 	}
 
@@ -99,7 +100,7 @@ class Reward extends React.Component {
 		const name = target.name;
 
 		this.setState({
-			[name]: value
+			[name]: value,
 		});
 	}
 
@@ -107,11 +108,11 @@ class Reward extends React.Component {
 		event.preventDefault();
 		db.collection("rewards").add({
 			title: this.state.item,
-			userId: this.context.user.uid
+			userId: this.context.user.uid,
 		});
 		this.setState({
 			rewards: [...this.state.rewards, this.state.item],
-			item: ""
+			item: "",
 		});
 	}
 
@@ -152,9 +153,9 @@ class Reward extends React.Component {
 										<Button
 											className="btn-icon btn-sm mr-2 float-right"
 											outline
-											onClick={e => {
+											onClick={(e) => {
 												e.stopPropagation();
-												this.claimReward(item.cost);
+												this.claimReward(item.cost, item.title);
 											}}
 											color="warning"
 											disabled={item.cost > this.context.user.stats.diamonds}

@@ -171,8 +171,21 @@ class Header extends React.Component {
 												</Col>
 											</Row>
 											<p className="mt-3 mb-0 text-muted text-sm">
-												<span className="text-success mr-2">Homework</span>
-												<span className="text-nowrap">Last Activity</span>
+												{this.context.user.stats &&
+												this.context.user.stats.last ? (
+													<>
+														<span
+															className={`text-${this.context.user.stats.last.color} mr-2`}
+														>
+															{this.context.user.stats.last.title}
+														</span>
+														<span className="text-nowrap">Last Activity</span>
+													</>
+												) : (
+													<span className="text-nowrap">
+														No Recent Activity
+													</span>
+												)}
 											</p>
 										</CardBody>
 									</Card>

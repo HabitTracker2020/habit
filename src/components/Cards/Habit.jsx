@@ -13,7 +13,7 @@ import {
 	FormGroup,
 	Modal,
 	ButtonGroup,
-	Badge
+	Badge,
 } from "reactstrap";
 import GlobalContext from "context/Global";
 import { db } from "firebase.js";
@@ -37,14 +37,14 @@ class Habit extends React.Component {
 		modelProps: {
 			title: "",
 			type: "",
-			difficulty: ""
-		}
+			difficulty: "",
+		},
 	};
 
 	toggleModal = (name, props) => {
 		this.setState({
 			[name]: !this.state[name],
-			modelProps: props
+			modelProps: props,
 		});
 	};
 
@@ -53,13 +53,13 @@ class Habit extends React.Component {
 			trivial: 1,
 			easy: 1.5,
 			medium: 2,
-			hard: 3
+			hard: 3,
 		};
 		const health = {
 			trivial: 1,
 			easy: 2,
 			medium: 3,
-			hard: 4
+			hard: 4,
 		};
 		let newHealth, newDiamonds;
 		if (habit.type === "good") {
@@ -69,7 +69,8 @@ class Habit extends React.Component {
 			db.doc(`stats/${this.context.user.stats.id}`).update({
 				health: newHealth % 100,
 				diamonds: newDiamonds >= 500 ? 500 : newDiamonds,
-				level: this.context.user.stats.level + (newHealth >= 100 ? 1 : 0)
+				level: this.context.user.stats.level + (newHealth >= 100 ? 1 : 0),
+				last: { title: habit.title, color: "success" },
 			});
 		} else {
 			newHealth = this.context.user.stats.health - health[habit.difficulty];
@@ -78,12 +79,13 @@ class Habit extends React.Component {
 				this.toggleModal("healthModal", {
 					title: "",
 					type: "",
-					difficulty: ""
+					difficulty: "",
 				});
 				return;
 			}
 			db.doc(`stats/${this.context.user.stats.id}`).update({
-				health: newHealth % 100
+				health: newHealth % 100,
+				last: { title: habit.title, color: "danger" },
 			});
 		}
 
@@ -95,12 +97,13 @@ class Habit extends React.Component {
 	claimReward() {
 		db.doc(`stats/${this.context.user.stats.id}`).update({
 			diamonds: 0,
-			health: 100
+			health: 100,
+			last: { title: "Health Refilled", color: "danger" },
 		});
 		this.toggleModal("healthModal", {
 			title: "",
 			type: "",
-			difficulty: ""
+			difficulty: "",
 		});
 	}
 
@@ -110,7 +113,7 @@ class Habit extends React.Component {
 		this.toggleModal("habitModal", {
 			title: "",
 			type: "",
-			difficulty: ""
+			difficulty: "",
 		});
 	}
 
@@ -120,7 +123,7 @@ class Habit extends React.Component {
 		this.toggleModal("habitModal", {
 			title: "",
 			type: "",
-			difficulty: ""
+			difficulty: "",
 		});
 	}
 
@@ -129,16 +132,16 @@ class Habit extends React.Component {
 			db.collection("habits")
 				.where("userId", "==", this.context.user.uid)
 				.onSnapshot(
-					querySnapshot => {
+					(querySnapshot) => {
 						var habits = [];
-						querySnapshot.forEach(doc => {
+						querySnapshot.forEach((doc) => {
 							habits.push({ ...doc.data(), id: doc.id });
 						});
 						this.setState({
-							habits: [...habits]
+							habits: [...habits],
 						});
 					},
-					err => {
+					(err) => {
 						console.log(`Encountered error: ${err}`);
 					}
 				);
@@ -151,7 +154,7 @@ class Habit extends React.Component {
 		const name = target.name;
 
 		this.setState({
-			modelProps: { ...this.state.modelProps, [name]: value }
+			modelProps: { ...this.state.modelProps, [name]: value },
 		});
 	}
 
@@ -161,7 +164,7 @@ class Habit extends React.Component {
 		const name = target.name;
 
 		this.setState({
-			[name]: value
+			[name]: value,
 		});
 	}
 
@@ -169,11 +172,11 @@ class Habit extends React.Component {
 		event.preventDefault();
 		db.collection("habits").add({
 			title: this.state.item,
-			userId: this.context.user.uid
+			userId: this.context.user.uid,
 		});
 		this.setState({
 			habits: [...this.state.habits, this.state.item],
-			item: ""
+			item: "",
 		});
 	}
 
@@ -226,7 +229,7 @@ class Habit extends React.Component {
 										{item.type ? (
 											<Button
 												className="btn-icon btn-sm mr-2 float-right"
-												onClick={e => {
+												onClick={(e) => {
 													e.preventDefault();
 													e.stopPropagation();
 													this.doHabit(item);
@@ -268,7 +271,7 @@ class Habit extends React.Component {
 						this.toggleModal("habitModal", {
 							title: "",
 							type: "",
-							difficulty: ""
+							difficulty: "",
 						})
 					}
 				>
@@ -394,7 +397,7 @@ class Habit extends React.Component {
 						this.toggleModal("healthModal", {
 							title: "",
 							type: "",
-							difficulty: ""
+							difficulty: "",
 						})
 					}
 				>
