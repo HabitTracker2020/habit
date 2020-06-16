@@ -57,9 +57,9 @@ class Habit extends React.Component {
     db.doc(`stats/${this.context.user.stats.id}`).update({
       last: { title: title, color: "info" },
       logs: [
-        { title: title, color: "info" },
+        { title: title, color: "info", timestamp: new Date().getTime() },
         ...(this.context.user.stats.logs
-          ? this.context.user.stats.logs.slice(1, 10)
+          ? this.context.user.stats.logs.slice(0, 9)
           : []),
       ],
     });

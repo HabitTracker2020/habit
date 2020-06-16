@@ -72,9 +72,13 @@ class Habit extends React.Component {
         level: this.context.user.stats.level + (newHealth >= 100 ? 1 : 0),
         last: { title: habit.title, color: "success" },
         logs: [
-          { title: habit.title, color: "success" },
+          {
+            title: habit.title,
+            color: "success",
+            timestamp: new Date().getTime(),
+          },
           ...(this.context.user.stats.logs
-            ? this.context.user.stats.logs.slice(1, 10)
+            ? this.context.user.stats.logs.slice(0, 9)
             : []),
         ],
       });
@@ -93,9 +97,13 @@ class Habit extends React.Component {
         health: newHealth % 100,
         last: { title: habit.title + " accomplished", color: "danger" },
         logs: [
-          { title: habit.title + " accomplished", color: "danger" },
+          {
+            title: habit.title + " accomplished",
+            color: "danger",
+            timestamp: new Date().getTime(),
+          },
           ...(this.context.user.stats.logs
-            ? this.context.user.stats.logs.slice(1, 10)
+            ? this.context.user.stats.logs.slice(0, 9)
             : []),
         ],
       });
@@ -112,9 +120,13 @@ class Habit extends React.Component {
       health: 100,
       last: { title: "Health Refilled", color: "danger" },
       logs: [
-        { title: "Health Refilled", color: "danger" },
+        {
+          title: "Health Refilled",
+          color: "danger",
+          timestamp: new Date().getTime(),
+        },
         ...(this.context.user.stats.logs
-          ? this.context.user.stats.logs.slice(1, 10)
+          ? this.context.user.stats.logs.slice(0, 9)
           : []),
       ],
     });

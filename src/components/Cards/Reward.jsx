@@ -50,9 +50,13 @@ class Reward extends React.Component {
       diamonds: this.context.user.stats.diamonds - cost,
       last: { title: title + " Claimed", color: "warning" },
       logs: [
-        { title: title + " Claimed", color: "warning" },
+        {
+          title: title + " Claimed",
+          color: "warning",
+          timestamp: new Date().getTime(),
+        },
         ...(this.context.user.stats.logs
-          ? this.context.user.stats.logs.slice(1, 10)
+          ? this.context.user.stats.logs.slice(0, 9)
           : []),
       ],
     });
